@@ -14,4 +14,4 @@ install:
   - pipenv install 
 
 script:
-  - python manage.py test 
+  - python seer_site\manage.py test 
