@@ -14,5 +14,4 @@ deploy:
   provider: heroku
   api_key:
     secure: buCRWNVsQKu0YHTez9sGxItrTA6i0i+1bakIEOHMJGFPkti7NiYJO9lnNMOtT0BH4MsV305yniB7Fx48/O0cwgdlFlv7sEEoALy1WX/brUhI1Q+WuYaw+q1FVFKNLGawlUpkcVsekDnoU3wyil2xf+rXgxTF8q/tcbXwhSCBznNHobry5/Sw3w0dxDE1Miq75GJiZwmTWohBgqf93x1iKbLAlD7Ja3Umbz+VRJpX1bhIU/Yy3LCePfoI68Wez6jDLqF45NLIq4Y86eVB5y+lBgo2dDYkLtPqzXFoY/xCSB7Q+jOsavsTWFXbmvmCK9I0ylKRbzqFIKwGKbCu4AltjlNfBc6WahVNeiw/8MB6oe/US9CrTEaRLmuPfKS364AfLpypywhiWp5+w7773xHSilACburJy+UdNBMh40gvpou/LWnh0G9oGrdJbi025ttWJBtUEb+cPfVSIvjwepbovD6Ey6uqYfi4QthsWRGbYPI2NIO4V0pGC8Kf0amjzlXaAVy3/Ky6Sd3Sm+9WteuL5Z8y9BI5HgQ/Nst7jyWPuvGTUGOkJOYYWnWwBws/U4ohZ5oKLgHXqODwU3u1/IJ8pgh+23liD+ECJDsDLpnBR/yUsAmuvs3EakTIvhf7EwzdS42TSNC4+Gfmc9IAcZQg/iM/vYYSVViQj7DaKKYmO6s=
-  on:
-    all_branches: true 
+  on: develop
