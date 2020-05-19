@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from enum import Enum
 from django.utils.translation import gettext_lazy as _
+from _datetime import date
+import django
 
 # Create your models here.
 
@@ -11,10 +13,10 @@ class User(models.Model):
     User_ID = models.AutoField(primary_key = True)
     F_name = models.CharField(max_length = 40, default = '', null = False)
     L_name = models.CharField(max_length = 40, default = '', null = False)
-    Birth_date = models.DateTimeField
+    Birth_date = models.DateField('Birth Date', default = django.utils.timezone.now)
     Email = models.CharField(max_length = 80, default = '', null = False)
     def __str__(self):
-        return "Name: {} {}/nBirth Date: {}/nEmail: {}/n".format(self.F_name, self.L_name, self.Birth_date, self.Email)
+        return self.F_name + ' ' + self.L_name 
 
 class Account(models.Model):
     Account_ID = models.AutoField(primary_key = True)
@@ -22,19 +24,19 @@ class Account(models.Model):
     Username = models.CharField(max_length = 40, default = '', null = False)
     Password = models.CharField(max_length = 40, default = '', null = False)
     def _str_(self):
-        return "Account ID: {}/nUsername: {}/n".format(self.Account_ID, self.Username)
+        return self.Username
 
 class Roles(models.Model):
     Role_ID = models.AutoField(primary_key = True)
     Role_Description = models.CharField(max_length = 40, default = '', null = False)
     def _str_(self):
-        return "Role: {}/n".format(self.Role_Description)
+        return self.Role_Description
 
 class AccountRoles(models.Model):
     Account_ID = models.ForeignKey(Account, on_delete=models.CASCADE)
     Role_ID = models.ForeignKey(Roles, on_delete=models.CASCADE)
     def _str_(self):
-        return "Account ID: {}/nRole ID: {}/n".format(self.Account_ID, self.Role_ID)
+        return self.Account_ID + ' ' + self.Role_ID
 
 class Article(models.Model):
     class ArticleStatus(models.TextChoices):
@@ -46,7 +48,7 @@ class Article(models.Model):
     Article_ID = models.AutoField(primary_key = True)
     Title = models.CharField(max_length = 100, default = '', null = False)
     Author = models.CharField(max_length = 100, default = '', null = False)
-    Publication_date = models.DateTimeField
+    Publication_date = models.DateField('Publication Date', default = django.utils.timezone.now)
     Journal = models.CharField(max_length = 200, default = '', null = False)
     Volume = models.IntegerField(null = False)
     Issue = models.IntegerField(null = False)
@@ -62,4 +64,4 @@ class Search(models.Model):
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     Article_ID = models.ForeignKey(Article, on_delete=models.CASCADE)
     def _str_(self):
-        return "Search ID: {}/nKeywords: {}/n".format(self.Search_ID, self.Keywords)
+        return self.Search_ID
