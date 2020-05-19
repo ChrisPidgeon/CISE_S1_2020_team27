@@ -31,6 +31,8 @@ class Roles(models.Model):
 class AccountRoles(models.Model):
     Account_ID = models.ForeignKey(Account, on_delete=models.CASCADE)
     Role_ID = models.ForeignKey(Roles, on_delete=models.CASCADE)
+    def _str_(self):
+        return "Account ID: {}/nRole ID: {}/n".format(self.Account_ID, self.Role_ID)
 
 class Article(models.Model):
     Article_ID = models.IntegerField(primary_key = True)
