@@ -52,7 +52,7 @@ class Article(models.Model):
     Issue = models.IntegerField(null = False)
     Article_Description = models.TextField(max_length = 800, default = '', null = False)
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    Status = models.CharField(choices = ArticleStatus.choices, default = ArticleStatus.SAVED)
+    Status = models.CharField(max_length = 6, choices = ArticleStatus.choices, default = ArticleStatus.SAVED)
     def _str_(self):
         return self.Article_Description
 
