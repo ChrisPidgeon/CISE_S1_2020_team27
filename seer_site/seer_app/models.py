@@ -5,38 +5,28 @@ from django.utils import timezone
 
 # Create your models here.
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-    def __str__(self):
-        return self.question_text
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-    
-class Choice(models.Model):
-    question = models.ForeignKey(Question,on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-    def __str__(self):
-        return self.choice_text
-
 class User(models.Model):
-    User_ID = models.IntegerField(primary_key =True)
+    User_ID = models.IntegerField(primary_key = True)
     F_name = models.CharField(max_length = 40)
     L_name = models.CharField(max_length = 40)
     Birth_date = models.DateTimeField
     Email = models.CharField(max_length = 80)
-
+    def __str__(self):
+        return "Name: {} {}/nBirth Date: {}/nEmail: {}/n".format(self.F_name, self.L_name, self.Birth_date, self.Email)
+    
 class Account(models.Model):
     Account_ID = models.IntegerField(primary_key = True)
     User_Id = models.ForeignKey(User, on_delete=models.CASCADE)
     Username = models.CharField(max_length = 40)
     Password = models.CharField(max_length = 40)
+    def _str_(self):
+        return "Account ID: {}/nUsername: {}/n".format(self.Account_ID, self.Username)
 
 class Roles(models.Model):
     Role_ID = models.IntegerField(primary_key = True)
     Role_Description = models.CharField(max_length = 40)
-    ####integrate an enum here
+    def _str_(self):
+        return "Role: {}/n".format(self.Role_Description)
 
 class AccountRoles(models.Model):
     Account_ID = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -53,9 +43,13 @@ class Article(models.Model):
     Article_Description = models.TextField(max_length = 800)
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     ###Status Integrate an enum here
+    def _str_(self):
+        return self.Article_Description
 
 class Search(models.Model):
     Search_ID = models.IntegerField(primary_key = True)
-    Keywords = models.CharField(max_length = 50)
+    Keywords = models.CharField(max_length = 100)
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     Article_ID = models.ForeignKey(Article, on_delete=models.CASCADE)
+    def _str_(self):
+        return "Search ID: {}/nKeywords: {}/n".format(self.Search_ID, self.Keywords)
