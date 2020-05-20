@@ -9,6 +9,10 @@ pylint = "*"
 [packages]
 django = "*"
 django-heroku = "*"
+gunicorn = "*"
+dj-database-url = "*"
+whitenoise = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.8"
