@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["guarded-plains-28648.herokuapp.com/"]
 # Application definition
 
 INSTALLED_APPS = [
-    'seer_app.apps.SeerAppConfig',
+    '.seer_app.apps.SeerAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
