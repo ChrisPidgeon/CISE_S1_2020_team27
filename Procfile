@@ -1,1 +1,1 @@
-web: gunicorn seer_site/wsgi --log-file -
+web: gunicorn seer_site.wsgi --log-file -
