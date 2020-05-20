@@ -26,7 +26,7 @@ SECRET_KEY = 'bkmyz^5_fd503bn#wp__!ax)b-h3n9)llg%=9#i1av-hn7u4^8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["guarded-plains-28648.herokuapp.com/",
+ALLOWED_HOSTS = ["fast-retreat-14086.herokuapp.com/",
 "127.0.0.1"]
 
 
