@@ -11,28 +11,58 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
     </head>
     <body>
+        <!--Luis 20/05/2020 aligned logo and title to left-->
         <section class="hero is-dark is-bold">
             <div class="hero-body ">
-              <div class="container ">
+                <div class="container ">
+                    <div class="columns is-mobile is-left is-vcentered">
+                        <figure class="image is-64x64">
+                            <img class="is-rounded" src="{% static 'seer_app/media/SEER_Logo.png' %}">
+                        </figure>
+                        <div class="column">
+                        <span class="title">
+                                <strong>
+                            SEER Website
+                                </strong>
+                            </span><br>
+                        <span class="subtitle">Search for an article</span>
+                        </div>
+                    </div>
+                  <!--
                 <h1 class="title" >
                     <figure class="image is-64x64">
-                        <img class="is-rounded" src="{% static 'seer_app/media/SEER_Logo.png' %}">
+                        <img class="is-rounded" src="SEER_Logo_cropped.png">
                     </figure>
                     <strong>SEER WEBSITE</strong>
                 </h1>
                 <h2 class="subtitle">
                     Search for an Article!
                 </h2>
-              </div>
+            -->
+                </div>
             </div>
         </section>
 
     <br/> <br/>
         <div class="columns">
-            <div class="column is-three-quarters is-bold">Popular Articles!</div>
+            <div class="column is-three-quarters is-bold">
+                <h2>Popular Articles!</h2>
 
-            <!--List of all popular articles!  (NEEDS A DATABASE INPUT/OUTPUT)-->
-
+                <div class="container">
+                <!--List of all popular articles!-->
+                <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
+                {% for a in articles %}
+                Title: {{ a.Title }} <br/>
+                Author: {{ a.Author }} <br/>
+                Publication Date: {{ a.Publication_Date }} <br/>
+                Journal: {{ a.Journal }} <br/>
+                Volume(Issue): {{ a.Volume }}({{a.Issue}}) <br/>
+                Discription: {{a.Article_Description}}<br/>
+                <br/><br/>
+                {% endfor %}
+                
+            </div>
+        </div>
             <div class="column">
                 <div class="field has-addons">
                     <div class="control">
