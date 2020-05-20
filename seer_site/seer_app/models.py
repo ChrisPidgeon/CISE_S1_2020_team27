@@ -17,26 +17,30 @@ class User(models.Model):
     Email = models.CharField(max_length = 80, default = '', null = False)
     def __str__(self):
         return self.F_name + ' ' + self.L_name 
+    objects = models.Manager()
 
 class Account(models.Model):
     Account_ID = models.AutoField(primary_key = True)
-    User_Id = models.ForeignKey(User, on_delete=models.CASCADE)
+    User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     Username = models.CharField(max_length = 40, default = '', null = False)
     Password = models.CharField(max_length = 40, default = '', null = False)
     def _str_(self):
         return self.Username
+    objects = models.Manager()
 
 class Roles(models.Model):
     Role_ID = models.AutoField(primary_key = True)
     Role_Description = models.CharField(max_length = 40, default = '', null = False)
     def _str_(self):
         return self.Role_Description
+    objects = models.Manager()    
 
 class AccountRoles(models.Model):
     Account_ID = models.ForeignKey(Account, on_delete=models.CASCADE)
     Role_ID = models.ForeignKey(Roles, on_delete=models.CASCADE)
     def _str_(self):
         return self.Account_ID + ' ' + self.Role_ID
+    objects = models.Manager()
 
 class Article(models.Model):
     class ArticleStatus(models.TextChoices):
@@ -57,6 +61,7 @@ class Article(models.Model):
     Status = models.CharField(max_length = 6, choices = ArticleStatus.choices, default = ArticleStatus.SAVED)
     def _str_(self):
         return self.Article_Description
+    objects = models.Manager()
 
 class Search(models.Model):
     Search_ID = models.AutoField(primary_key = True)
@@ -65,3 +70,4 @@ class Search(models.Model):
     Article_ID = models.ForeignKey(Article, on_delete=models.CASCADE)
     def _str_(self):
         return self.Search_ID
+    objects = models.Manager()

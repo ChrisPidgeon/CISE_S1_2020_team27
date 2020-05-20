@@ -9,7 +9,7 @@ install:
 - pip install pipenv
 - pipenv install
 script:
-- python seer_site/manage.py test
+- python seer_site/manage.py test seer_app.tests
 #deploy:
 #  provider: heroku
 #  api_key:
