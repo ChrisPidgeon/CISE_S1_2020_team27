@@ -52,6 +52,32 @@
                 <!--List of all popular articles!-->
                 <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
                 {% for a in articles %}
+
+                <div class="block">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title: </th>
+                                <th>Author: </th>
+                                <th>Publication Date: </th>
+                                <th>Journal: </th>
+                                <th>Volume(Issue): </th>
+                                <th>Description: </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{a.Title}}</td>
+                                <td>{{a.Author}}</td>
+                                <td>{{a.Publication_Date}}</td>
+                                <td>{{a.Journal}}</td>
+                                <td>{{a.Volume}}</td>
+                                <td>{{a.Description}}</td>
+                            </tr>
+                    </table>
+                </div>
+
+
                 Title: {{ a.Title }} <br/>
                 Author: {{ a.Author }} <br/>
                 Publication Date: {{ a.Publication_date }} <br/>
