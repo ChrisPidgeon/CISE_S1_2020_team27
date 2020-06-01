@@ -46,13 +46,13 @@ class AccountRolesTestCase(TestCase):
         test_account = Account.objects.create(Account_ID = 1, User_ID = test_user, 
         Username = "JoeBloggs", Password = "asdasdasd")
 
-        test_role = Roles.objects.create(Role_Description = "General User")
-        AccountRoles.objects.create(Account_ID = test_account, Role_ID = test_role)
+        test_role = Roles.objects.create(Role_Type = "General User")
+        AccountRoles.objects.create(Account_ID = test_account, Role_Type = test_role)
 
     def test_account_roles_are_defined_correctly(self):
         test_user = User.objects.get(F_name = "Joe", L_name = "Bloggs")
         test_account = Account.objects.get(Username = "JoeBloggs")
-        test_role = Roles.objects.get(Role_Description = "General User")
+        test_role = Roles.objects.get(Role_Type = "General User")
         test_account_roles = AccountRoles.objects.get(Account_ID = test_account, Role_ID = test_role)
 
         self.assertTrue(test_account_roles.Account_ID.User_ID.User_ID == test_user.User_ID)
