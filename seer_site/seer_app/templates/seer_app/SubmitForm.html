@@ -6,10 +6,13 @@
 
     <div class="container">
         <form method="POST"> {% csrf_token %}
-            {{ form.as_p }}
-
-
-            <input type="submit" value="Submit">
+            {% for field in form %}
+                <div class="field">
+                    <label for="{{field.id_for_label }}" class="label">{{ field.html_name }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+            <button type="submit" class="button is-primary">Submit</button>
         </form>
     </div>
 

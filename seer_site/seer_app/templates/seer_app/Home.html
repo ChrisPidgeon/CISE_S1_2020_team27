@@ -6,14 +6,12 @@
     <br/> <br/>
         <div class="columns">
             <div class="column is-three-quarters is-bold">
-                <h2>Popular Articles!</h2>
-                <br/><br/>
+                <h1 style="font-size:20px;">Popular Articles!</h1>
 
-                <div class="container">
+                <div style="width:1150px;height:430px;overflow:scroll;padding:5px;">
+                    
                 <!--List of all popular articles!-->
                 <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
-               {% for a in articles %}
-                    <!--
                 <div class="block">
                     <table class="table">
                         <thead>
@@ -26,27 +24,31 @@
                                 <th>Description: </th>
                             </tr>
                         </thead>
+                        {% for a in articles %}
                         <tbody>
                             <tr>
                                 <td>{{a.Title}}</td>
                                 <td>{{a.Author}}</td>
-                                <td>{{a.Publication_Date}}</td>
+                                <td>{{a.Publication_date}}</td>
                                 <td>{{a.Journal}}</td>
-                                <td>{{a.Volume}}</td>
-                                <td>{{a.Description}}</td>
+                                <td>{{a.Volume}}({{a.Issue}})</td>
+                                <td>{{a.Article_Description}}</td>
                             </tr>
+                            <br/><br/>
+                {% endfor %}
                     </table>
                 </div>
-            -->
-
+            
+                <!--
                 Title: {{ a.Title }} <br/>
                 Author: {{ a.Author }} <br/>
                 Publication Date: {{ a.Publication_date }} <br/>
                 Journal: {{ a.Journal }} <br/>
                 Volume(Issue): {{ a.Volume }}({{a.Issue}}) <br/>
                 Discription: {{a.Article_Description}}<br/>
+                -->
                 <br/><br/>
-                {% endfor %}
+
                 
             </div>
         </div>
@@ -56,7 +58,7 @@
                         <input class="input" type="text" placeholder="Enter keywords">
                     </div>
                     <div class="control">
-                        <a class="button is-info">Search</a>
+                        <a class="button is-link">Search</a>
                     </div>
                 </div>
             <!--search form-->
