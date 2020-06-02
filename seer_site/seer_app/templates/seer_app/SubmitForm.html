@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="content-type" content="text/html" charset="utf-8"/>
+        <title>SEER</title>
+
+        <!-- The link below references to the css stylesheet used. I have opted for an online CDN link for CSS as it keeps the bulk of the program less-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
+    </head>
+    <body>
+        <!--Luis 20/05/2020 aligned logo and title to left-->
+        <section class="hero is-dark is-bold">
+            <div class="hero-body ">
+                <div class="container ">
+                    <div class="columns is-mobile is-left is-vcentered">
+                        <figure class="image is-64x64">
+                            <img class="is-rounded" src="{% static 'seer_app/media/SEER_Logo.png' %}">
+                        </figure>
+                        <div class="column">
+                        <span class="title">
+                                <strong>
+                            SEER Website
+                                </strong>
+                            </span><br>
+                        <span class="subtitle">Search for an article</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <br/> <br/>
+        
+    <div class="container">
+        <form method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+
+
+            <input type="submit" value="Submit">
+        </form>
+
+
+
+    </div>

@@ -1,8 +1,8 @@
 from django.urls import path
-
-from . import views
+from seer_app.views import index, submit
 
 urlpatterns = [
-    path('', views.index, name='Home Page'),
+    path('', index, name='Home Page'),
+    path('submit/', submit, name='Submit')
 ]
 

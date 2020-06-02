@@ -87,7 +87,7 @@ class Article(models.Model):
     Issue = models.IntegerField(null = False)
     Article_Description = models.TextField(max_length = 800, default = '', null = False, verbose_name=("Description"))
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=("User ID"))
-    Status = models.CharField(max_length = 6, choices = ArticleStatus.choices, default = ArticleStatus.SAVED)
+    Status = models.CharField(max_length = 6, choices = ArticleStatus.choices, default = ArticleStatus.SUBMITTED)
     Created = models.DateTimeField(auto_now_add = True, verbose_name = "Creation Date")
     def _str_(self):
         return self.Article_Description
