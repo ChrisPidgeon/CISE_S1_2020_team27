@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include,path
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+
+app_name = 'seer_app'
 
 urlpatterns = [
     path('seer_app/', include('seer_app.urls')),
     path('admin/', admin.site.urls),
+    #url(r'^seer_app/',include('seer_app.urls',namespace='search')),
+    path('',include('seer_app.urls')),
 ]

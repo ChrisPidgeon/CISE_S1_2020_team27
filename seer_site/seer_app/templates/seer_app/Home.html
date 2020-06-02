@@ -66,11 +66,36 @@
             <div class="column">
                 <div class="field has-addons">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Enter keywords">
+                        <form action="{% url 'seer_app:searcharticles' %}" method="GET" value="{{request.GET.q}}">
+                            <input class="input" name="q" value="{{request.GET.q}}" type="text" placeholder="Enter keywords"/>
+                            <input type="submit" name="submit" value="Search"/>
+                        </form>
+                        
+
+                        {% if submitbutton == 'Search' and request.GET.q != '' %}
+                        {% if results %}
+                        <h1>Results for <b>{{ request.GET.q</b></h1>
+                        </br></br>
+
+                        {% for result in results %}
+
+                        {{result.title}}
+                        <br/>
+
+                        {{result.content}}
+                        <br/>
+
+                        {% endfor %}
+                        {% else %}
+                        No search results for this query
+                        {% endif %}
+                        {% endif %}
+
+
                     </div>
-                    <div class="control">
+                    <!--<div class="control">
                         <a class="button is-info">Search</a>
-                    </div>
+                    </div>-->
                 </div>
             <!--search form-->
           </div>
