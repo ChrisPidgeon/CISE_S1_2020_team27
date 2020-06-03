@@ -72,11 +72,11 @@ class Article(models.Model):
         verbose_name_plural = "Articles"
 
     class ArticleStatus(models.TextChoices):
-        SUBMITTED = 'SUB', _('SUBMITTED')
-        IN_MODERATION = 'IN_MOD', _('IN MODERATION')
-        MODERATED = 'MOD', _('MODERATED')
-        ANALYZED = 'ANA', _('ANALYZED')
-        SAVED = 'SAV', _('SAVED')
+        SUBMITTED = 'SUB', _('Submitted')
+        IN_MODERATION = 'IN_MOD', _('In Moderation')
+        MODERATED = 'MOD', _('Moderated')
+        IN_ANALYSIS = 'IN_ANA', _('In Analysis')
+        ANALYZED = 'ANA', _('Analyzed')
 
     Article_ID = models.AutoField(primary_key = True, verbose_name=("Article ID"))
     Title = models.CharField(max_length = 100, default = '', null = False)
@@ -90,7 +90,7 @@ class Article(models.Model):
     Status = models.CharField(max_length = 6, choices = ArticleStatus.choices, default = ArticleStatus.SUBMITTED)
     Created = models.DateTimeField(auto_now_add = True, verbose_name = "Creation Date")
     def _str_(self):
-        return self.Article_Description
+        return self.Title
     objects = models.Manager()
 
 class Search(models.Model):
