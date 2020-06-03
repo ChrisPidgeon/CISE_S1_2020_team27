@@ -1,0 +1,59 @@
+{% extends "seer_app/base.html" %}
+{{ block.super }}
+
+{% block content %}
+<div class="columns">
+    <div class="column is-three-quarters is-bold">
+        <h1 style="font-size:20px;">Search Results for "{{ request.GET.q }}"</h1>
+
+        <div style="width:1150px;height:430px;overflow:scroll;padding:5px;">
+            
+        <!--List of all popular articles!-->
+        <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
+        <div class="block">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title: </th>
+                        <th>Author: </th>
+                        <th>Publication Date: </th>
+                        <th>Journal: </th>
+                        <th>Volume(Issue): </th>
+                        <th>Description: </th>
+                    </tr>
+                </thead>
+                {% for result in results %}
+                <tbody>
+                    <tr>
+                        <td>{{result.Title}}</td>
+                        <td>{{result.Author}}</td>
+                        <td>{{result.Publication_date}}</td>
+                        <td>{{result.Journal}}</td>
+                        <td>{{result.Volume}}({{a.Issue}})</td>
+                        <td>{{result.Article_Description}}</td>
+                    </tr>
+                    <br/><br/>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    </div>
+        <div class="column">
+            <div class="field has-addons">
+                <div class="control">
+                   <!-- <input class="input" type="text" placeholder="Enter keywords"> --> 
+                </div>
+                <div class="control">
+                   <!-- <a class="button is-info">Search</a> --> 
+                </div>
+            </div>
+
+            <form action="{%url 'search:searchposts'%}" method = "GET" value="{{request.GET.q}}"> 
+            Search <input type="text" name ="q" value ="{{request.GET.q}}"placeholder="Search Articles"/>
+            <input type="submit" name="submit" value="Search"/>
+
+            
+
+
+
+{% endblock content %}

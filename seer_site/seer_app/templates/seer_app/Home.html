@@ -1,77 +1,78 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html" charset="utf-8"/>
-        <title>SEER</title>
+{% extends "seer_app/base.html" %}
+{{ block.super }}
 
-        <!-- The link below references to the css stylesheet used. I have opted for an online CDN link for CSS as it keeps the bulk of the program less-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
-    </head>
-    <body>
-        <!--Luis 20/05/2020 aligned logo and title to left-->
-        <section class="hero is-dark is-bold">
-            <div class="hero-body ">
-                <div class="container ">
-                    <div class="columns is-mobile is-left is-vcentered">
-                        <figure class="image is-64x64">
-                            <img class="is-rounded" src="{% static 'seer_app/media/SEER_Logo.png' %}">
-                        </figure>
-                        <div class="column">
-                        <span class="title">
-                                <strong>
-                            SEER Website
-                                </strong>
-                            </span><br>
-                        <span class="subtitle">Search for an article</span>
-                        </div>
-                    </div>
-                  <!--
-                <h1 class="title" >
-                    <figure class="image is-64x64">
-                        <img class="is-rounded" src="SEER_Logo_cropped.png">
-                    </figure>
-                    <strong>SEER WEBSITE</strong>
-                </h1>
-                <h2 class="subtitle">
-                    Search for an Article!
-                </h2>
-            -->
-                </div>
-            </div>
-        </section>
 
+{% block content %}
     <br/> <br/>
         <div class="columns">
             <div class="column is-three-quarters is-bold">
-                <h2>Popular Articles!</h2>
+                <h1 style="font-size:20px;">Popular Articles!</h1>
 
-                <div class="container">
+                <div style="width:1150px;height:430px;overflow:scroll;padding:5px;">
+                    
                 <!--List of all popular articles!-->
-                <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
-                {% for a in articles %}
+                <!--Luis 20/05/2020 display saved articles by article ID-->
+                <div class="block">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title: </th>
+                                <th>Author: </th>
+                                <th>Publication Date: </th>
+                                <th>Journal: </th>
+                                <th>Volume(Issue): </th>
+                                <th>Description: </th>
+                            </tr>
+                        </thead>
+                        {% for a in articles %}
+                        <tbody>
+                            <tr>
+                                <td>{{a.Title}}</td>
+                                <td>{{a.Author}}</td>
+                                <td>{{a.Publication_date}}</td>
+                                <td>{{a.Journal}}</td>
+                                <td>{{a.Volume}}({{a.Issue}})</td>
+                                <td>{{a.Article_Description}}</td>
+                            </tr>
+                            <br/><br/>
+                        {% endfor %}
+                    </table>
+                </div>
+            
+                <!--
                 Title: {{ a.Title }} <br/>
                 Author: {{ a.Author }} <br/>
                 Publication Date: {{ a.Publication_date }} <br/>
                 Journal: {{ a.Journal }} <br/>
                 Volume(Issue): {{ a.Volume }}({{a.Issue}}) <br/>
                 Discription: {{a.Article_Description}}<br/>
+                -->
                 <br/><br/>
-                {% endfor %}
+
                 
             </div>
         </div>
-            <div class="column">
-                <div class="field has-addons">
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Enter keywords">
-                    </div>
-                    <div class="control">
-                        <a class="button is-info">Search</a>
-                    </div>
-                </div>
-            <!--search form-->
-          </div>
+        <div class="column">
+            <form action="{%url 'search:searchposts'%}" method = "GET" value="{{request.GET.q}}"> 
+            Search <input type="text" name ="q" value ="{{request.GET.q}}"placeholder="Search Articles"/>
+            <input type="submit" name="submit" value="Search"/>
+
+            {% if submitbutton == 'Search' and request.GET.q != '' %}
+            {% if results %}
+                <h1>Results for <b>{{ request.GET.q }}</b></h1>
+<br/><br/>
+
+            {% for result in results %}
+                {{result.Title}}
+                <br/>
+
+                {% endfor %}
+                {% else %}
+                No search results
+                {% endif %}
+                {% endif %}
+            </form>
+      </div>
+
+{% endblock content %}
 
