@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Article
+from seer_app.models import Article
+from django.db.models import Q
 
 from .forms import submitArticleForm
 
@@ -23,3 +24,27 @@ def submit(request):
     }
 
     return render(request, 'seer_app/SubmitForm.html', context)
+
+def search(request):
+    if request.method == 'GET':
+        query=request.GET.get('q')
+
+        submitbutton = request.GET.get('submit')
+
+        if query is not None:
+            lookups = (
+                Q(Title__icontains = query) |
+                Q(Author__icontains = query)
+                )
+            #searchByAuthor = Q(Author__icontains = query)
+            results = Article.objects.filter(lookups).distinct()
+
+            context={'results': results,'submitbutton': submitbutton}
+
+            return render(request,'seer_app/search_results.html',context)
+
+        else:
+            return render(request, 'seer_app/search_results.html')
+    else:
+
+        return render(request,'seer_app/search_results.html')
