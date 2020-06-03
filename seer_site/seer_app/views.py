@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Article
+from seer_app.models import Article
 from django.db.models import Q
-from django.views.generic import ListView
 
 def index(request):
     #Luis 20/05/2020 added Articles model table to view
@@ -11,33 +10,27 @@ def index(request):
     return render(request, 'seer_app/Home.html', context)
 
 
-# def searcharticles(request):
-#     if request.method == 'GET':
-#         query = request.GET.get('q')
 
-#         submitbutton = request.GET.get('submit')
+def searchposts(request):
+    if request.method == 'GET':
+        query=request.GET.get('q')
 
-#         if query is not None:
-#             lookups = Q(Title__icontains = query)
+        submitbutton = request.GET.get('submit')
 
-#             results = Article.objects.filter(lookups).distinct()
+        if query is not None:
+            #lookups = Q(Title__icontains = query)
 
-#             context = {'results': results, 'submitbutton': submitbutton}
+            searchByAuthor = Q(Author__icontains = query)
+            results = Article.objects.filter(searchByAuthor).distinct()
 
-#             return render(request, 'seer_app/Home.html',context)
+            context={'results': results,'submitbutton': submitbutton}
 
-#         else:
-#             return render(request,'seer_app/Home.html')
+            return render(request,'seer_app/search_results.html',context)
 
-#     else:
-#         return render (request,'seer_app/Home.html')
+        else:
+            return render(request, 'seer_app/search_results.html')
+    else:
 
-class SearchResultsView(ListView):
-    model = Article
-    template_name = 'searchresults.html'
+        return render(request,'seer_app/search_results.html')
 
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Article.objects.filter(Q(title__icontains = query))
 
-        return object_list

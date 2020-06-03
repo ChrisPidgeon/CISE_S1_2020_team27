@@ -1,0 +1,15 @@
+{% extends "seer_app/Home.html" %}
+
+{% block content %}
+
+{% endblock %}
+
+<h1>Search Results</h1>
+
+<ul>
+    {% for result in results %}
+      <li>
+          {{result.Title}}
+      </li>
+    {% endfor %}
+</ul>

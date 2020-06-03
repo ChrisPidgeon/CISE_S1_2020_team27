@@ -1,14 +1,19 @@
 from django.urls import path
 from django.conf.urls import url
-from django.contrib import admin
+from .views import (searchposts)
+
 from . import views
-from .views import SearchResultsView
+
+
+
 
 
 urlpatterns = [
     path('', views.index, name='Home Page'),
-    #url(r'^$',searcharticles, name='searcharticles'),
-    path('',SearchResultsView.as_view(), name = 'search_results'),
+    path('search/',views.searchposts,name='search_results'),
+
+    url(r'^$',searchposts,name='searchposts'),
+    
 ]
 
 
