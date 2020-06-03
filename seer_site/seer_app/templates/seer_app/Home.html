@@ -57,9 +57,7 @@
             Search <input type="text" name ="q" value ="{{request.GET.q}}"placeholder="Search Articles"/>
             <input type="submit" name="submit" value="Search"/>
 
-
-            <!--
-            {% if submitbutton == 'Search' and request.GET.q != ''%}
+            {% if submitbutton == 'Search' and request.GET.q != '' %}
             {% if results %}
                 <h1>Results for <b>{{ request.GET.q }}</b></h1>
 <br/><br/>
@@ -73,7 +71,7 @@
                 No search results
                 {% endif %}
                 {% endif %}
-            -->
+            </form>
       </div>
 
 {% endblock content %}

@@ -11,19 +11,30 @@
         <!--List of all popular articles!-->
         <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
         <div class="block">
-            <ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title: </th>
+                        <th>Author: </th>
+                        <th>Publication Date: </th>
+                        <th>Journal: </th>
+                        <th>Volume(Issue): </th>
+                        <th>Description: </th>
+                    </tr>
+                </thead>
                 {% for result in results %}
-                <li>
-                    Title: {{ result.Title }} <br/>
-                    Author: {{ result.Author }} <br/>
-                    Publication Date: {{ result.Publication_date }} <br/>
-                    Journal: {{ result.Journal }} <br/>
-                    Volume(Issue): {{ result.Volume }}({{result.Issue}}) <br    />
-                    Discription: {{result.Article_Description}}<br/>
+                <tbody>
+                    <tr>
+                        <td>{{result.Title}}</td>
+                        <td>{{result.Author}}</td>
+                        <td>{{result.Publication_date}}</td>
+                        <td>{{result.Journal}}</td>
+                        <td>{{result.Volume}}({{a.Issue}})</td>
+                        <td>{{result.Article_Description}}</td>
+                    </tr>
                     <br/><br/>
-                </li>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     </div>
     </div>

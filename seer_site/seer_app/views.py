@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from seer_app.models import Article
 from django.db.models import Q
 
-from .forms import submitArticleForm
+from .forms import submitArticleForm, uploadBibtexForm
 
 def index(request):
     #Luis 20/05/2020 added Articles model table to view
@@ -31,7 +31,7 @@ def search(request):
 
         submitbutton = request.GET.get('submit')
 
-        if query is not None:
+        if query:
             lookups = (
                 Q(Title__icontains = query) |
                 Q(Author__icontains = query)
@@ -48,3 +48,11 @@ def search(request):
     else:
 
         return render(request,'seer_app/search_results.html')
+
+def upload(request):
+    form = uploadBibtexForm(request.POST or None)
+
+    context = {
+        'form' : form
+    }
+    return render(request, 'seer_app/upload.html', context)
