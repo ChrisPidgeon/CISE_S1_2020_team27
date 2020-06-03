@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from seer_app.models import Article
 from django.db.models import Q
 
-from .forms import submitArticleForm, uploadBibtexForm
+from .forms import submitArticleForm
 
 def index(request):
     #Luis 20/05/2020 added Articles model table to view
@@ -49,10 +49,10 @@ def search(request):
 
         return render(request,'seer_app/search_results.html')
 
-def upload(request):
-    form = uploadBibtexForm(request.POST or None)
+# def upload(request):
+#     form = uploadBibtexForm(request.POST or None)
 
-    context = {
-        'form' : form
-    }
-    return render(request, 'seer_app/upload.html', context)
+#     context = {
+#         'form' : form
+#     }
+#     return render(request, 'seer_app/upload.html', context)

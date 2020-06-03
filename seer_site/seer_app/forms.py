@@ -1,7 +1,6 @@
 from django import forms
 from .models import Article
 
-
 class submitArticleForm(forms.ModelForm):
     class Meta:
         model = Article
@@ -14,3 +13,6 @@ class submitArticleForm(forms.ModelForm):
             'Issue',
             'User_ID'      
         ]
+
+# class uploadBibtexForm(forms.Form):
+#     bibFile = forms.FileField()
