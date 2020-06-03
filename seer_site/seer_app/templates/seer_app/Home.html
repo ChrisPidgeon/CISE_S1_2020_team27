@@ -11,7 +11,7 @@
                 <div style="width:1150px;height:430px;overflow:scroll;padding:5px;">
                     
                 <!--List of all popular articles!-->
-                <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
+                <!--Luis 20/05/2020 display saved articles by article ID-->
                 <div class="block">
                     <table class="table">
                         <thead>
@@ -35,7 +35,7 @@
                                 <td>{{a.Article_Description}}</td>
                             </tr>
                             <br/><br/>
-                {% endfor %}
+                        {% endfor %}
                     </table>
                 </div>
             
@@ -53,19 +53,12 @@
             </div>
         </div>
         <div class="column">
-            <div class="field has-addons">
-                <div class="control">
-                   <!-- <input class="input" type="text" placeholder="Enter keywords"> --> 
-                </div>
-                <div class="control">
-                   <!-- <a class="button is-info">Search</a> --> 
-                </div>
-            </div>
-
             <form action="{%url 'search:searchposts'%}" method = "GET" value="{{request.GET.q}}"> 
             Search <input type="text" name ="q" value ="{{request.GET.q}}"placeholder="Search Articles"/>
             <input type="submit" name="submit" value="Search"/>
 
+
+            <!--
             {% if submitbutton == 'Search' and request.GET.q != ''%}
             {% if results %}
                 <h1>Results for <b>{{ request.GET.q }}</b></h1>
@@ -80,7 +73,7 @@
                 No search results
                 {% endif %}
                 {% endif %}
-        <!--search form-->
+            -->
       </div>
 
 {% endblock content %}

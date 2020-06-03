@@ -3,8 +3,8 @@
 
 {% block content %}
 <br/><br/>
-
-    <div class="container">
+<div class="container">
+    <h1 style="font-size: 20px; font: bold;">Submit new Article</h1>
         <form method="POST"> {% csrf_token %}
             {% for field in form %}
                 <div class="field">

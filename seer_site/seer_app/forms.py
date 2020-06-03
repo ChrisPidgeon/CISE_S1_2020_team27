@@ -12,6 +12,5 @@ class submitArticleForm(forms.ModelForm):
             'Journal',
             'Volume',
             'Issue',
-            'Article_Description',
             'User_ID'      
         ]

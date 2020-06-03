@@ -2,13 +2,47 @@
 {{ block.super }}
 
 {% block content %}
-<h1>Search Results</h1>
+<div class="columns">
+    <div class="column is-three-quarters is-bold">
+        <h1 style="font-size:20px;">Search Results for "{{ request.GET.q }}"</h1>
 
-<ul>
-    {% for result in results %}
-      <li>
-          {{result.Title}}
-      </li>
-    {% endfor %}
-</ul>
+        <div style="width:1150px;height:430px;overflow:scroll;padding:5px;">
+            
+        <!--List of all popular articles!-->
+        <!--Luis 20/05/2020 display saved articles by article ID (i think)-->
+        <div class="block">
+            <ul>
+                {% for result in results %}
+                <li>
+                    Title: {{ result.Title }} <br/>
+                    Author: {{ result.Author }} <br/>
+                    Publication Date: {{ result.Publication_date }} <br/>
+                    Journal: {{ result.Journal }} <br/>
+                    Volume(Issue): {{ result.Volume }}({{result.Issue}}) <br    />
+                    Discription: {{result.Article_Description}}<br/>
+                    <br/><br/>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+        <div class="column">
+            <div class="field has-addons">
+                <div class="control">
+                   <!-- <input class="input" type="text" placeholder="Enter keywords"> --> 
+                </div>
+                <div class="control">
+                   <!-- <a class="button is-info">Search</a> --> 
+                </div>
+            </div>
+
+            <form action="{%url 'search:searchposts'%}" method = "GET" value="{{request.GET.q}}"> 
+            Search <input type="text" name ="q" value ="{{request.GET.q}}"placeholder="Search Articles"/>
+            <input type="submit" name="submit" value="Search"/>
+
+            
+
+
+
 {% endblock content %}
