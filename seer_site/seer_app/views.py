@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from seer_app.models import Article
+from .models import Article
 from django.db.models import Q
 
 from .forms import submitArticleForm
