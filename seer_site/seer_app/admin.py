@@ -33,6 +33,14 @@ class AccountRolesAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('Article_ID', 'Title', 'Status')
     list_filter = ('Created',)
+
+    def delete_duplicates(self, request, queryset):
+        all_articles = Article.objects.all()
+        for article in all_articles.reverse():
+            if Article.objects.filter(Title=article.Title).count() > 1:
+                article.delete()
+    
+    delete_duplicates.short_description = "Delete duplicate articles"
    
     def make_submitted(self, request, queryset):
         rows_updated = queryset.update(Status = "SUB")
@@ -88,7 +96,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     make_analyzed.short_description = "Mark selected articles as analyzed"
 
-    actions = [make_submitted, make_in_moderation, make_moderated, make_in_analysis, make_analyzed]
+    actions = [delete_duplicates, make_submitted, make_in_moderation, make_moderated, make_in_analysis, make_analyzed]
 
     def get_actions(self, request):
         actions = super().get_actions(request)
