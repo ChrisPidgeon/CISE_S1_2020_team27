@@ -23,16 +23,18 @@
                     </tr>
                 </thead>
                 {% for result in results %}
+                {% if a.Status == "ANA" %}
                 <tbody>
                     <tr>
                         <td>{{result.Title}}</td>
                         <td>{{result.Author}}</td>
                         <td>{{result.Publication_date}}</td>
                         <td>{{result.Journal}}</td>
-                        <td>{{result.Volume}}({{a.Issue}})</td>
+                        <td>{{result.Volume}}({{result.Issue}})</td>
                         <td>{{result.Article_Description}}</td>
                     </tr>
                     <br/><br/>
+                {% endif %}
                 {% endfor %}
             </table>
         </div>
