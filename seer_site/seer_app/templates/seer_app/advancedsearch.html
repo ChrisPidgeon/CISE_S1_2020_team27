@@ -59,12 +59,37 @@
 {% comment %} Testing start {% endcomment %}
 
 
-<form method="GET" action="">
+<form method="POST" action="">{% csrf_token %}
 Date From: <input type="date"  name="startDate" value="{{request.GET.startDate}}">
-Date To: <input type="date"  name="endDate" value="{{request.GET.startDate}}">
+Date To: <input type="date"  name="endDate" value="{{request.GET.endDate}}">
+
+
+</br></br>
+<div class="control">
+        <div class="select">
+            <select name="field">
+                <option disabled selected>Field</option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="description">Description</option>
+            </select>
+        </div>
+        <div class="select">
+            <select name="operator">
+                <option disabled selected>Operator</option>
+                <option value="contain">contains</option>
+                <option value="notcontain">doesn't contain</option>
+                <option value="beginswith">begins with</option>
+                <option value="endswith">ends with</option>
+                <option value="equals">is equal to</option>
+            </select>
+        </div>
+        <input type="text" name="advkeyword" type="text" placeholder="value" style="height: 40px;">
+</div>
+
 <input type="submit" name="submit" value="Search"/>
 
-
+</br></br>
 
 </form>
 
@@ -82,15 +107,15 @@ Date To: <input type="date"  name="endDate" value="{{request.GET.startDate}}">
                         <th>Description: </th>
                     </tr>
                 </thead>
-                {% for datedresult in datedresult %}
+                {% for final_result in final_result %}
                 <tbody>
                     <tr>
-                        <td>{{datedresult.Title}}</td>
-                        <td>{{datedresult.Author}}</td>
-                        <td>{{datedresult.Publication_date}}</td>
-                        <td>{{datedresult.Journal}}</td>
-                        <td>{{datedresult.Volume}}({{datedresult.Issue}})</td>
-                        <td>{{datedresult.Article_Description}}</td>
+                        <td>{{final_result.Title}}</td>
+                        <td>{{final_result.Author}}</td>
+                        <td>{{final_result.Publication_date}}</td>
+                        <td>{{final_result.Journal}}</td>
+                        <td>{{final_result.Volume}}({{final_result.Issue}})</td>
+                        <td>{{final_result.Article_Description}}</td>
                     </tr>
                     <br/><br/>
                 {% endfor %}

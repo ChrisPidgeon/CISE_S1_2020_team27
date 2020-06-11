@@ -52,17 +52,82 @@ def search(request):
 
 
 def advancedsearch(request):
-    if request.method == "GET":
-        start_date = request.GET.get('startDate')
-        # start_date = datetime.datetime.year
-        end_date = request.GET.get('endDate')
+    if request.method == "POST":
+        start_date = request.POST.get('startDate')
 
-        submitbutton = request.GET.get('submit')
+        end_date = request.POST.get('endDate')
+
+        search_field = request.POST.get('field')
+
+        search_operator = request.POST.get('operator')
+
+        search_keyword = request.POST.get('advkeyword')
+
+        submitbutton = request.POST.get('submit')
+
+        print (search_field)
+        print (search_operator)
 
         if start_date:
-            datedresult = Article.objects.filter(Publication_date__range=(start_date, end_date)).distinct()
+            aq = Article.objects.filter(Publication_date__range=(start_date, end_date)).order_by('-Publication_date')
 
-            context={'datedresult' : datedresult,'submitbutton' : submitbutton}
+            if search_operator == 'contain':
+
+                if search_field == 'title':
+                    final_result = aq.filter(Title__icontains=search_keyword)
+
+                elif search_field == 'author':
+                    final_result = aq.filter(Author__icontains=search_keyword)
+
+                elif search_field == 'description':
+                    final_result = aq.filter(Article_Description__icontains=search_keyword)
+
+            elif search_operator == 'notcontain':
+
+                if search_field == 'title':
+                    final_result = ~aq.filter(Title__icontains=search_keyword)
+
+                elif search_field == 'author':
+                    final_result = ~aq.filter(Author__icontains=search_keyword)
+
+                elif search_field == 'description':
+                    final_result = ~aq.filter(Article_Description__icontains=search_keyword)
+
+            elif search_operator == 'beginswith':
+                
+                if search_field == 'title':
+                    final_result = aq.filter(Title__istartswith=search_keyword)
+
+                elif search_field == 'author':
+                    final_result = aq.filter(Author__istartswith=search_keyword)
+
+                elif search_field =='description':
+                    final_result = aq.filter(Article_Description__istartswith=search_keyword)
+
+            elif search_operator == 'endswith':
+                
+                if search_field == 'title':
+                    final_result = aq.filter(Title__iendswith=search_keyword)
+
+                elif search_field == 'author':
+                    final_result = aq.filter(Author__iendswith=search_keyword)
+
+                elif search_field =='description':
+                    final_result = aq.filter(Article_Description__iendswith=search_keyword)
+
+            elif search_operator == 'equals':
+                
+                if search_field == 'title':
+                    final_result = aq.filter(Title__iexact=search_keyword)
+
+                elif search_field == 'author':
+                    final_result = aq.filter(Author__iexact=search_keyword)
+
+                elif search_field =='description':
+                    final_result = aq.filter(Article_Description__iexact=search_keyword)
+
+
+            context={'final_result' : final_result,'submitbutton' : submitbutton}
 
             return render(request,'seer_app/advancedsearch.html',context)
 
@@ -70,10 +135,6 @@ def advancedsearch(request):
             return render(request,'seer_app/advancedsearch.html')
     else:
         return render(request,'seer_app/advancedsearch.html')
-
-
-
-
 
 # def upload(request):
 #     form = uploadBibtexForm(request.POST or None)
