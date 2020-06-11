@@ -1,68 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SEER</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
-  <body>
-    <section class="hero is-dark is-bold">
-        <div class="hero-body ">
-            <div class="container ">
-                <div class="columns is-mobile is-left is-vcentered">
-                    <figure class="image is-64x64">
-                        <img class="is-rounded" src="{% static 'seer_app/media/SEER_Logo.png' %}">
-                    </figure>
-                    <div class="column">
-                        <span class="title">
-                            <strong>
-                                Software Engineering Evidence Repository
-                            </strong>
-                        </span><br>
-                        <span class="subtitle">
-                            Search for an article
-                        </span>
-                    </div>
-                    <nav class="navbar is-link">
-                        <div class="container">
-                            <span class="navbar-burger burger" data-target="navMenu">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </div>
-                        <div id="navMenu" class="navbar-menu">
-                            <div class="navbar-end">
-                                <a href="{% url 'Home' %}" class="navbar-item is-active">Home</a>
-                                <a href="{% url 'Submit' %}" class="navbar-item">Submit</a>
-                                <a href="" class="navbar-item"></a>
-                                <a href="" class="navbar-item"></a>
-                                <a href="" class="navbar-item"></a>
-                            </div>
-                        </div>
-                    </div>    
-                </nav>
-            </div>
-                </div>
-        </div>
+{% extends "seer_app/base.html" %}
+{{ block.super }}
 
-    </section>
-
-    {% block content %}
-
-
-
-
+{% block content %}
 {% comment %} Testing start {% endcomment %}
 
-
 <form method="POST" action="">{% csrf_token %}
-Date From: <input type="date"  name="startDate" value="{{request.GET.startDate}}">
-Date To: <input type="date"  name="endDate" value="{{request.GET.endDate}}">
-
+Date From: <input type="date"  name="startDate" value="{{ request.POST.startDate }}">
+Date To: <input type="date"  name="endDate" value="{{ request.POST.endDate }}">
 
 </br></br>
 <div class="control">
@@ -93,51 +37,38 @@ Date To: <input type="date"  name="endDate" value="{{request.GET.endDate}}">
 
 </form>
 
-<h1 style="font-size:20px;">Search Results between "{{ request.GET.startDate}}  and  {{request.GET.endDate}} "</h1>
+<h1 style="font-size:20px;">Search Results between "{{ request.POST.startDate}}  and  {{request.POST.endDate}} "</h1>
+<h1 style="font-size:20px;">Where "{{ request.POST.field}}" {{ request.POST.operator}} "{{ request.POST.advkeyword}}"</h1>
 
 <div class="block">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Title: </th>
-                        <th>Author: </th>
-                        <th>Publication Date: </th>
-                        <th>Journal: </th>
-                        <th>Volume(Issue): </th>
-                        <th>Description: </th>
-                    </tr>
-                </thead>
-                {% for final_result in final_result %}
-                <tbody>
-                    <tr>
-                        <td>{{final_result.Title}}</td>
-                        <td>{{final_result.Author}}</td>
-                        <td>{{final_result.Publication_date}}</td>
-                        <td>{{final_result.Journal}}</td>
-                        <td>{{final_result.Volume}}({{final_result.Issue}})</td>
-                        <td>{{final_result.Article_Description}}</td>
-                    </tr>
-                    <br/><br/>
-                {% endfor %}
-            </table>
-        </div>
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title: </th>
+                <th>Author: </th>
+                <th>Publication Date: </th>
+                <th>Journal: </th>
+                <th>Volume(Issue): </th>
+                <th>Description: </th>
+            </tr>
+            </thead>
+            {% for final_result in final_result %}
+            {% if final_result.Status == "ANA" %}
+            <tbody>
+                <tr>
+                    <td>{{final_result.Title}}</td>
+                    <td>{{final_result.Author}}</td>
+                    <td>{{final_result.Publication_date}}</td>
+                    <td>{{final_result.Journal}}</td>
+                    <td>{{final_result.Volume}}({{final_result.Issue}})</td>
+                    <td>{{final_result.Article_Description}}</td>
+                </tr>
+                <br/><br/>
+            </tbody>
+            {% endif %}
+            {% endfor %}
+    </table>
+</div>
 
 {% comment %} Test Finish {% endcomment %}
-
-
-    {% endblock content %}
-    
-    <script type="text/javascript">
-    (function(){
-        var burger = document.querySelector('.burger');
-        var nav = document.querySelector('#'+burger.dataset.target);
-
-        burger.addEventListener('click', function(){
-            burger.classList.toggle('is-active');
-            nav.classList.toggle('is-active');
-        })
-    })();
-    </script>
-  </body>
-</html>
+{% endblock content %}
