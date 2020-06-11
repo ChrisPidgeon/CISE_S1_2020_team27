@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Article
 from django.db.models import Q
+import datetime
 
 from .forms import submitArticleForm
 
@@ -48,6 +49,31 @@ def search(request):
     else:
 
         return render(request,'seer_app/search_results.html')
+
+
+def advancedsearch(request):
+    if request.method == "GET":
+        start_date = request.GET.get('startDate')
+        # start_date = datetime.datetime.year
+        end_date = request.GET.get('endDate')
+
+        submitbutton = request.GET.get('submit')
+
+        if start_date:
+            datedresult = Article.objects.filter(Publication_date__range=(start_date, end_date)).distinct()
+
+            context={'datedresult' : datedresult,'submitbutton' : submitbutton}
+
+            return render(request,'seer_app/advancedsearch.html',context)
+
+        else:
+            return render(request,'seer_app/advancedsearch.html')
+    else:
+        return render(request,'seer_app/advancedsearch.html')
+
+
+
+
 
 # def upload(request):
 #     form = uploadBibtexForm(request.POST or None)

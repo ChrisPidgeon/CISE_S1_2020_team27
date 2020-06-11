@@ -28,4 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     url(r'^search/',include(('seer_app.urls', 'app_name'),namespace='search')),
+
+    url(r'^advancedsearch/',include(('seer_app.urls','app_name'),namespace='advancedsearch')),
 ]
