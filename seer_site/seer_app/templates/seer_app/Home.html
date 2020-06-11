@@ -25,6 +25,7 @@
                             </tr>
                         </thead>
                         {% for a in articles %}
+                        {% if a.Status == "ANA" %}
                         <tbody>
                             <tr>
                                 <td>{{a.Title}}</td>
@@ -35,6 +36,7 @@
                                 <td>{{a.Article_Description}}</td>
                             </tr>
                             <br/><br/>
+                        {% endif %}
                         {% endfor %}
                     </table>
                 </div>
